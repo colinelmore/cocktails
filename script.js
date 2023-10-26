@@ -29,9 +29,23 @@ const getCocktails = async () => {
   
     const h3 = document.createElement("h3");
     h3.innerText = cocktail.strDrink;
+    const p = document.createElement("p")
+    p.innerText = cocktail.strCategory;
     cocktailSection.append(h3);
+    cocktailSection.append(p);
     return cocktailSection;
-   
   };
-  
+
+ /* const getCocktailCategroy = (cocktail) => {
+    const cocktailSection = document.createElement("section");
+    cocktailSection.classList.add("cocktail");
+
+    const category = document.createElement("p");
+    p.innerText = cocktail.strCategory;
+    cocktailSection.append(p);
+    return cocktailSection;
+
+    
+  }
+  */
   window.onload = () => showCocktails();
