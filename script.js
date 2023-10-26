@@ -1,5 +1,5 @@
-const getBreweries = async () => {
-    const url = "https://api.openbrewerydb.org/breweries";
+const getCocktails = async () => {
+    const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
   
     try {
       const response = await fetch(url);
@@ -9,44 +9,36 @@ const getBreweries = async () => {
     }
   };
   
-  const showBreweries = async () => {
-    let breweries = await getBreweries();
-    let breweriesSection = document.getElementById("breweries-section");
+  const showCocktails = async () => {
+    let cocktails = await getCocktails();
+    let cocktailsSection = document.getElementById("cocktails-section");
   
-    breweries.forEach((brewery) =>
-      breweriesSection.append(getBreweryItem(brewery))
+    cocktails.forEach((brewery) =>
+    cocktailsSection.append(getCocktailItem(cocktail))
     );
   };
   
-  const getBreweryItem = (brewery) => {
-    const brewerySection = document.createElement("section");
-    brewerySection.classList.add("brewery");
+  const getCocktailItem = (cocktail) => {
+    const cocktailSection = document.createElement("section");
+    cocktailSection.classList.add("cocktail");
   
     const a = document.createElement("a");
-    a.href = brewery.website_url;
-    brewerySection.append(a);
+    a.href = cocktail.website_url;
+    cocktailSection.append(a);
   
     const h3 = document.createElement("h3");
-    h3.innerText = brewery.name;
+    h3.innerText = cocktail.name;
     a.append(h3);
   
     const p = document.createElement("p");
-    p.textContent = `${brewery.brewery_type} Brewery`;
+    p.textContent = `${cocktail.cocktail_strDrink} Brewery`;
     a.append(p);
   
-    a.append(getBreweryAddress(brewery));
+   const p2 = document.createElement("p");
+   p2.textContent = `${cocktail.cocktail_strCategory}`
+a.append(p2);
   
-    const iframe = document.createElement("iframe");
-  
-    iframe.src = `https://maps.google.com/maps?q=${brewery.latitude},${brewery.longitude}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
-    brewerySection.append(iframe);
-    return brewerySection;
+    
   };
   
-  const getBreweryAddress = (brewery) => {
-    const p = document.createElement("p");
-    p.innerHTML = `${brewery.street}<br> ${brewery.city}, ${brewery.state}<br> ${brewery.country} ${brewery.postal_code}`;
-    return p;
-  };
-  
-  window.onload = () => showBreweries();
+  window.onload = () => showCocktails();
