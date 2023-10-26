@@ -1,6 +1,6 @@
 const getCocktails = async () => {
     const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
-  
+
     try {
       const response = await fetch(url);
       return await response.json();
@@ -13,7 +13,10 @@ const getCocktails = async () => {
     let cocktails = await getCocktails();
     let cocktailsSection = document.getElementById("cocktails-section");
   
-    cocktails.forEach((brewery) =>
+
+    console.log(cocktails.drinks);
+    
+    cocktails.drinks.forEach((cocktail) =>
     cocktailsSection.append(getCocktailItem(cocktail))
     );
   };
@@ -22,23 +25,13 @@ const getCocktails = async () => {
     const cocktailSection = document.createElement("section");
     cocktailSection.classList.add("cocktail");
   
-    const a = document.createElement("a");
-    a.href = cocktail.website_url;
-    cocktailSection.append(a);
+    console.log(cocktail);
   
     const h3 = document.createElement("h3");
-    h3.innerText = cocktail.name;
-    a.append(h3);
-  
-    const p = document.createElement("p");
-    p.textContent = `${cocktail.cocktail_strDrink} Brewery`;
-    a.append(p);
-  
-   const p2 = document.createElement("p");
-   p2.textContent = `${cocktail.cocktail_strCategory}`
-a.append(p2);
-  
-    
+    h3.innerText = cocktail.strDrink;
+    cocktailSection.append(h3);
+    return cocktailSection;
+   
   };
   
   window.onload = () => showCocktails();
